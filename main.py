@@ -1,14 +1,16 @@
 # coding: utf-8
-import Utils
-import Class
-import Option
+from utils import *
+from myclass import *
+from option import *
 
 if __name__ == "__main__":
-    args = Option.BaseOptions().parse()
-    author = Class.Author(args.author_name,args.school,args.department,args.city,args.country)
-    m = Utils.get_author_url(author)
-    if  isinstance(m,str):
-        P = Class.Papers(m,author.name)
+    args = BaseOptions().parse()
+    author = Author(args.author_name,args.school,args.department,args.city,args.country)
+    cmp_info,url = get_author_url(author)
+    if args.print_cmp_info:
+        cmp_info.print_cmp_info()
+    if  isinstance(url,str):
+        P = Papers(author)
         P.parse()
         P.print_paper()
 
